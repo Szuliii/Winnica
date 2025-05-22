@@ -1,11 +1,10 @@
 <?php
 session_start();
     if(isset($_SESSION['nazwa'])) {
-        header("Location: main.php");
+        header("Location: panel.php");
         exit;
     }
-    if(isset($_POST['rejestracja']))
-        header("Location: rejestracja.php");
+    
 
     $pol=mysqli_connect("localhost","root","","winnica");
     
@@ -13,12 +12,12 @@ session_start();
         $nazwa=$_POST['nazwa'];
          $haslo=hash('sha1', $_POST['haslo']);
        
-        $sql="SELECT * FROM uzytkownicy WHERE nazwa='$nazwa' AND haslo='$haslo'";
+        $sql="SELECT * FROM administratorzy WHERE nazwa='$nazwa' AND haslo='$haslo'";
         $wynik=mysqli_query($pol,$sql);
         if($wynik->num_rows==1){
 
             if($_SESSION['nazwa']=$nazwa)
-            header("Location: main.php");
+            header("Location: panel.php");
             else echo"Błędny login lub hasło";
         }
         
@@ -37,7 +36,7 @@ session_start();
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
+        <a href="logowanie.php">Logowanie</a>
         <a href="admin.php">ADMIN</a>
         
     </nav>
@@ -50,7 +49,7 @@ session_start();
                 <label for="haslo">Hasło: </label>
                 <input type="text" name="haslo" require><br>
                 <input type="submit" value="Zaloguj"name="logowanie">
-                <input type="submit" value="Rejestracja" name="rejestracja">
+               
             </form>
         </section>
     </main>

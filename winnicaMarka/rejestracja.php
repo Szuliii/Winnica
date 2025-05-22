@@ -1,27 +1,3 @@
-<?php
-    if(isset($_POST['rejestracja'])){
-        $nazwa=$_POST['nazwa'];
-        $imie=$_POST['imie'];
-        $nazwisko=$_POST['nazwisko'];
-        $haslo=hash('sha1', $_POST['haslo']);
-        $adres=$_POST['adres'];
-        $data=$_POST['data'];
-        $data_ur=date_create($data);
-        $pol=mysqli_connect("localhost","root","","winnica");
-        $dzis=date_create("now");
-        $lata=date_diff($data_ur,$dzis);
-        $r=$lata->format("%y");
-        
-        
-        if($r<18)
-            die("Musisz mieć 18 lat!!!");
-        else{
-            $sql="INSERT INTO `uzytkownicy`( `nazwa`, `imie`, `nazwisko`, `haslo`, `adres`) VALUES ('$nazwa','$imie','$nazwisko','$haslo','$adres')";
-            $wynik=mysqli_query($pol,$sql);
-        }
-
-    }
-            ?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -32,14 +8,14 @@
 </head>
 <body>
     
-    <nav><a href="main.php"><img src="LogoSklepu.png" alt=""></a>
+    <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
         <a href="logowanie.php">Logowanie</a>
         
     </nav>
     <main>
-        <img src="winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
+        <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
        <section id="sekcjaMain" style="width:30%; ">
             <form action="" method="post">
                 <label for="imie">Imię: </label>
@@ -63,6 +39,30 @@
                 
                 <input type="submit" value="Rejestracja" name="rejestracja">
             </form>
+            <?php
+    if(isset($_POST['rejestracja'])){
+        $nazwa=$_POST['nazwa'];
+        $imie=$_POST['imie'];
+        $nazwisko=$_POST['nazwisko'];
+        $haslo=hash('sha1', $_POST['haslo']);
+        $adres=$_POST['adres'];
+        $data=$_POST['data'];
+        $data_ur=date_create($data);
+        $pol=mysqli_connect("localhost","root","","winnica");
+        $dzis=date_create("now");
+        $lata=date_diff($data_ur,$dzis);
+        $r=$lata->format("%y");
+        
+        
+        if($r<18)
+            echo"<p style='font-size:200%'>Rejestracja przerwana, Musisz mieć 18lat!!!";
+        else{
+            $sql="INSERT INTO `uzytkownicy`( `nazwa`, `imie`, `nazwisko`, `haslo`, `adres`) VALUES ('$nazwa','$imie','$nazwisko','$haslo','$adres')";
+            $wynik=mysqli_query($pol,$sql);
+        }
+
+    }
+            ?>
         </section>
     </main>
 <footer>

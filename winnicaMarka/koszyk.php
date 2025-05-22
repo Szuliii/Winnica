@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,15 +12,66 @@
 </head>
 <body>
     
-    <nav><a href="main.php"><img src="LogoSklepu.png" alt=""></a>
+    <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        <a href="logowanie.php">Logowanie</a>
+        
          <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
     <main>
-        <img src="winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
-       
+        <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
+            <section id="katalogKoszyk">
+                <?php 
+                $cena = isset($_SESSION['cena']) ? $_SESSION['cena'] : 0;
+
+                echo "<h1>Twój koszyk</h1><br>";
+
+                if (!empty($_SESSION['koszyk'])) {
+                    foreach ($_SESSION['koszyk'] as $produkt => $ilosc) {
+                        echo "<p>$produkt - ilość: $ilosc</p>";
+                    }
+                    echo "<h3>Łączna cena: $cena zł</h3>";
+                } else {
+                    echo "<p>Koszyk jest pusty.</p>";
+                }
+                
+                $pol = mysqli_connect("localhost", "root", "", "winnica");
+                $nazwa = $_SESSION['nazwa'];
+                $sql1 = "SELECT id,adres FROM uzytkownicy WHERE nazwa='$nazwa';";
+                $wynik = mysqli_query($pol, $sql1);
+                while($wiersz=mysqli_fetch_row($wynik)){
+                    $id=$wiersz[0];
+                    $adres=$wiersz[1];
+                }
+                
+                $dzis = date("d-m-y");
+                if(isset($_POST['zamow'])){
+                $sql2="INSERT INTO `zamowienia`( `id_klienta`, `data_zamowienia`, `suma_zamowienia`,  `adres_dostawy`) VALUES ('$id','$dzis','$cena','$adres')";
+                $insert=mysqli_query($pol,$sql2);
+                if ($insert) {
+                $id_zamowienia = mysqli_insert_id($pol); 
+
+               
+                foreach ($_SESSION['koszyk'] as $nazwa_produktu => $ilosc) {
+                    $sqlWino = "SELECT id, cena FROM wina WHERE nazwa = '$nazwa_produktu'";
+                    $wynikWino = mysqli_query($pol, $sqlWino);
+
+                    if ($wierszWino = mysqli_fetch_assoc($wynikWino)) {
+                        $id_wina = $wierszWino['id'];
+                        $cena_wina = $wierszWino['cena'];
+
+                        $sqlPozycja = "INSERT INTO pozycje_zamowienia (id_zamowienia, id_wina, ilosc, cena)
+                                       VALUES ('$id_zamowienia', '$id_wina', '$ilosc', '$cena_wina')";
+                        mysqli_query($pol, $sqlPozycja);
+                    }
+                }
+                }}
+                ?>
+                <form action="" method="post">
+                    <input type="submit" value="Zamów" name="zamow">
+                </form>
+                </section>
+
     </main>
 <footer>
     <p>Adres: 87-300 Brodnica ul. Zamkowa 13 <br>
@@ -25,7 +80,7 @@
 </footer>    
 </body>
 <?php
-session_start();
+
 
 
 if(!isset($_SESSION['nazwa'])) {

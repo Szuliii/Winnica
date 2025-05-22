@@ -8,14 +8,14 @@
 </head>
 <body>
     
-    <nav><a href="main.php"><img src="LogoSklepu.png" alt=""></a>
+    <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
         <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        <a href="logowanie.php">Logowanie</a>
+        
        <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
     <main>
-        <img src="winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
+        <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
         <section id="sekcjaMain">
             <h2>Winnica Marka</h2>
             <p>Wszystko zaczęło się od pasji do dobrego wina i chęci dzielenia się tym, co najlepsze z własnej winnicy. Winnica Marka to połączenie tradycji, rzemiosła i serca wkładanego w każdą butelkę.
