@@ -1,63 +1,66 @@
+<?php
+session_start();
+if (!isset($_SESSION['nazwa'])) {
+    header("Location: logowanie.php");
+    exit;
+}
+
+if (!isset($_GET['id'])) {
+    echo "Brak ID produktu!";
+    exit;
+}
+
+$pol = mysqli_connect("localhost", "root", "", "winnica");
+$id = mysqli_real_escape_string($pol, $_GET['id']); // zabezpieczenie
+
+$sql = "SELECT id, nazwa, cena, zdjecie, opis FROM wina WHERE id = $id LIMIT 1;";
+$wynik = mysqli_query($pol, $sql);
+
+if (mysqli_num_rows($wynik) === 0) {
+    echo "Nie znaleziono produktu.";
+    exit;
+}
+
+$produkt = mysqli_fetch_assoc($wynik);
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winnica Marka</title>
+    <title><?php echo htmlspecialchars($produkt['nazwa']); ?> - Winnica Marka</title>
     <link rel="stylesheet" href="styl.css">
 </head>
 <body>
-    
-    <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
-         <a href="sklep.php">Sklep</a>
+    <nav>
+        <a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
+        <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        <a href="logowanie.php">Logowanie</a>
-         <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
+        <button onclick="zmienTryb()">Zmień tryb</button>
+        <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
+
     <main>
-        <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
-       <section id="katalogKoszyk">
-            
-            <?php
-                    $pol=mysqli_connect("localhost","root","","winnica");
-                    $sql = "SELECT wina.nazwa, typy_wina.nazwa as \"typ\", kraje.nazwa as \"kraj\", pojemnosc,cena,zdjecie FROM wina INNER JOIN kraje ON wina.kraj_pochodzenia= kraje.id INNER JOIN typy_wina ON wina.typ_wina=typy_wina.id;";
-                    $wynik=mysqli_query($pol,$sql);
-                    while($wiersz=mysqli_fetch_row($wynik)){
-                        echo" 
-                        
-                            <div id='produkt'>
-                            
-                                <img src='$wiersz[5]' alt='' >
-                                
-                                </div>
-                            
-                        ";
-
-                    }
-                ?>
-       </section>
+        <div class="produkt-szczegoly">
+            <img src="zdj/winnicav2.jpg" alt="">
+            <h1><?php echo htmlspecialchars($produkt['nazwa']); ?></h1>
+            <p><?php echo htmlspecialchars($produkt['opis']); ?></p>
+            <p><strong>Cena:</strong> <?php echo $produkt['cena']; ?> zł</p>
+            <form action="sklep.php" method="post">
+                <input type="hidden" name="produkt" value="<?php echo $produkt['nazwa']; ?>">
+                <input type="hidden" name="cena" value="<?php echo $produkt['cena']; ?>">
+                <label for="ilosc">Ilość:</label>
+                <input type="number" name="ilosc" min="1">
+                <input type="submit" name="doKoszyka" value="Dodaj do koszyka">
+            </form>
+        </div>
     </main>
-<footer>
-    <p>Adres: 87-300 Brodnica ul. Zamkowa 13 <br>
-    Tel: +48 123 456 789 E-mail:<a href="mailto:kontakt@winomarka.pl">kontakt@winomarka.pl</a>
-    </p>
-</footer>    
+
+    <footer>
+        <p>Adres: 87-300 Brodnica ul. Zamkowa 13 <br>
+        Tel: +48 123 456 789 E-mail:<a href="mailto:kontakt@winomarka.pl">kontakt@winomarka.pl</a>
+        </p>
+    </footer>
+    <script src="zmianaTrybu.js"></script>
 </body>
-
-<?php
-session_start();
-
-
-if(!isset($_SESSION['nazwa'])) {
-    header("Location: logowanie.php");
-    exit;
-}
-
-
-if(isset($_POST['wyloguj'])) {
-    session_destroy(); 
-    header("Location: logowanie.php");
-    exit;
-}
-?>
 </html>

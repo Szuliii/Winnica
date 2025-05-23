@@ -38,7 +38,7 @@ if(isset($_POST['wyloguj'])) {
        <div id="niewidzialny">
         <?php
                     $pol=mysqli_connect("localhost","root","","winnica");
-                    $sql = "SELECT nazwa, cena,zdjecie,opis FROM wina;";
+                    $sql = "SELECT nazwa, cena,zdjecie,opis,id FROM wina;";
                     $wynik=mysqli_query($pol,$sql);
                     if(isset($_POST['doKoszyka']) && isset($_POST['produkt']) && isset($_POST['ilosc'])) {
                         $produkt = $_POST['produkt'];
@@ -66,23 +66,22 @@ if(isset($_POST['wyloguj'])) {
                         
                     }
                     while($wiersz=mysqli_fetch_row($wynik)){
-                        echo" 
-                        
-                            <div class='katalog'>
-                            
-                                <img src='zdj/$wiersz[2]'' alt='' ><br>
+                                           echo" 
+                        <div class='katalog'>
+                            <a href='produkt.php?id=$wiersz[4]'>
+                                <img src='zdj/$wiersz[2]' alt='' ><br>
                                 <p>$wiersz[0]</p>
-                                <p>$wiersz[1]zł</p>
-                                <p>$wiersz[3]</p>
-                                <form action='sklep.php' method='post'>
-                                  <input type='hidden' name='produkt' value='$wiersz[0]'>
-                                    <input type='hidden' name='cena' value='$wiersz[1]'>
-                                    <label for='ilosc'>Ilość:</label>    
-                                    <input type='number' name='ilosc'>
-                                    <input type='submit' name='doKoszyka'>
-                                </form>
-                                </div>
-                            ";
+                            </a>
+                            <p>$wiersz[1] zł</p>
+                            <p>$wiersz[3]</p>
+                            <form action='sklep.php' method='post'>
+                                <input type='hidden' name='produkt' value='$wiersz[0]'>
+                                <input type='hidden' name='cena' value='$wiersz[1]'>
+                                <label for='ilosc'>Ilość:</label>    
+                                <input type='number' name='ilosc'>
+                                <input type='submit' name='doKoszyka'>
+                            </form>
+                        </div>";
 
                     }
                     
