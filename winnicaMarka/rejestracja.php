@@ -12,7 +12,7 @@
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
         <a href="logowanie.php">Logowanie</a>
-        
+        <button onclick="zmienTryb()">Zmień tryb</button>
     </nav>
     <main>
         <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
@@ -77,4 +77,5 @@
 <?php
 mysqli_close($pol);
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

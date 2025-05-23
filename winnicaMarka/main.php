@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winnica Marka</title>
     <link rel="stylesheet" href="styl.css">
+    
 </head>
 <body>
     
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
         <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
-       <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
+        <button onclick="zmienTryb()">Zmień tryb</button>
+       <form action="" method="post"><input  type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
     <main>
         <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
@@ -47,4 +48,5 @@ if(isset($_POST['wyloguj'])) {
     exit;
 }
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

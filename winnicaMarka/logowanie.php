@@ -37,8 +37,8 @@ session_start();
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
         <a href="admin.php">ADMIN</a>
+        <button onclick="zmienTryb()">Zmień tryb</button>
         
     </nav>
     <main>
@@ -65,4 +65,5 @@ session_start();
 <?php
 mysqli_close($pol);
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

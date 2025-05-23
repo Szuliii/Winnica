@@ -24,7 +24,7 @@ session_start();
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
+        <button onclick="zmienTryb()">Zmień tryb</button>
         <form action="" method="post">
         <input type="submit" value="Wyloguj" name="wyloguj">
         </form>
@@ -119,4 +119,5 @@ if(isset($_POST['usun'])){
 }
 mysqli_close($pol);
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

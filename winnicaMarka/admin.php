@@ -10,7 +10,7 @@ session_start();
     
      if($_SERVER["REQUEST_METHOD"]=="POST"){
         $nazwa=$_POST['nazwa'];
-         $haslo=hash('sha1', $_POST['haslo']);
+         $haslo= $_POST['haslo'];
        
         $sql="SELECT * FROM administratorzy WHERE nazwa='$nazwa' AND haslo='$haslo'";
         $wynik=mysqli_query($pol,$sql);
@@ -38,7 +38,7 @@ session_start();
         <a href="koszyk.php">Koszyk</a>
         <a href="logowanie.php">Logowanie</a>
         <a href="admin.php">ADMIN</a>
-        
+        <button onclick="zmienTryb()">Zmień tryb</button>
     </nav>
     <main>
         <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
@@ -64,4 +64,5 @@ session_start();
 <?php
 mysqli_close($pol);
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

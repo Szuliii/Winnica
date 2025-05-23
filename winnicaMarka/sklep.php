@@ -27,7 +27,7 @@ if(isset($_POST['wyloguj'])) {
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
+        <button onclick="zmienTryb()">Zmień tryb</button>
          <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
     <main>
@@ -61,8 +61,7 @@ if(isset($_POST['wyloguj'])) {
                                 $cena += $cenaProd * $ilosc;
                                 $_SESSION['cena'] = $cena;
                             
-                            header("Location: koszyk.php");
-                            exit;
+                            
                         }
                         
                     }
@@ -72,7 +71,7 @@ if(isset($_POST['wyloguj'])) {
                             <div class='katalog'>
                             
                                 <img src='zdj/$wiersz[2]'' alt='' ><br>
-                                <a href='produkt.php'>$wiersz[0]</a><br><br>
+                                <p>$wiersz[0]</p>
                                 <p>$wiersz[1]zł</p>
                                 <p>$wiersz[3]</p>
                                 <form action='sklep.php' method='post'>
@@ -97,5 +96,5 @@ if(isset($_POST['wyloguj'])) {
 </footer>    
 </body>
 
-
+<script src="zmianaTrybu.js"></script>
 </html>

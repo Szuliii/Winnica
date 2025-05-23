@@ -15,16 +15,19 @@ session_start();
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
-        
+        <button onclick="zmienTryb()">Zmień tryb</button>
          <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>
     <main>
         <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
             <section id="katalogKoszyk">
+                
+        </section>
+                <div id="koszyk">
                 <?php 
                 $cena = isset($_SESSION['cena']) ? $_SESSION['cena'] : 0;
 
-                echo "<h1>Twój koszyk</h1><br>";
+                echo "<h2>Twój koszyk</h2><br>";
 
                 if (!empty($_SESSION['koszyk'])) {
                     foreach ($_SESSION['koszyk'] as $produkt => $ilosc) {
@@ -51,11 +54,11 @@ session_start();
                 if ($insert) {
                 $id_zamowienia = mysqli_insert_id($pol); 
 
-               
+                if(!empty($_SESSION['koszyk'])){
                 foreach ($_SESSION['koszyk'] as $nazwa_produktu => $ilosc) {
                     $sqlWino = "SELECT id, cena FROM wina WHERE nazwa = '$nazwa_produktu'";
                     $wynikWino = mysqli_query($pol, $sqlWino);
-
+                    
                     if ($wierszWino = mysqli_fetch_assoc($wynikWino)) {
                         $id_wina = $wierszWino['id'];
                         $cena_wina = $wierszWino['cena'];
@@ -65,12 +68,20 @@ session_start();
                         mysqli_query($pol, $sqlPozycja);
                     }
                 }
-                }}
+                }
+            }
+                    unset($_SESSION['koszyk']);
+                    $cena=null;
+                    $nazwa=null;
+                    header("Refresh:0");
+                    exit;
+                }
                 ?>
                 <form action="" method="post">
                     <input type="submit" value="Zamów" name="zamow">
                 </form>
-                </section>
+                </div>
+                
 
     </main>
 <footer>
@@ -95,4 +106,5 @@ if(isset($_POST['wyloguj'])) {
     exit;
 }
 ?>
+<script src="zmianaTrybu.js"></script>
 </html>

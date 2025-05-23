@@ -6,6 +6,7 @@ body{
    display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: black;
 }
  nav, footer {
   flex: 0 0 15%; 
@@ -81,6 +82,8 @@ footer{
      background-color: black;
      color: white;
      text-align: center;
+     display: flex;
+     flex-direction: row;
     
     
 }
@@ -145,16 +148,57 @@ a{
   width: 100%;
 
 }
-input[type="submit"]{
+input[type="submit"],button{
     background-color: black;
     color: white;
-    padding: 1%;
+    padding: 0.5%;
+    
 }
-input[type="submit"]:hover{
+input[type="submit"]:hover,button:hover{
   background-color: darkred;
   color: black;
 }
 nav>a:hover{
   background-color: darkred;
+  color: black;
+}
+#koszyk{
+  position: absolute;
+     top: 0%; 
+     left: 0%;  
+     width: 100%;
+     height: 100%;
+     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 200%;
+     
+}
+body.light,
+body.light nav,
+body.light footer,
+body.light #sekcjaMain,
+body.light #katalogKoszyk,
+body.light #niewidzialny {
+  background-color: white;
+  color: black;
+  
+}
+
+body.light nav > a,
+body.light a,
+body.light input[type="submit"],
+body.light button,
+body.light #koszyk {
+  color: black;
+  background-color: white;
+}
+
+body.light input[type="submit"]:hover,
+body.light button:hover,
+body.light nav > a:hover {
+  background-color: lightgray;
   color: black;
 }
