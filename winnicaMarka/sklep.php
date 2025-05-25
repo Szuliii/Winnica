@@ -66,24 +66,15 @@ if(isset($_POST['wyloguj'])) {
                         
                     }
                     while($wiersz=mysqli_fetch_row($wynik)){
-                                           echo" 
+                        echo" 
                         <div class='katalog'>
                             <a href='produkt.php?id=$wiersz[4]'>
                                 <img src='zdj/$wiersz[2]' alt='' ><br>
                                 <p>$wiersz[0]</p>
                             </a>
-                            <p>$wiersz[1] zł</p>
-                            <p>$wiersz[3]</p>
-                            <form action='sklep.php' method='post'>
-                                <input type='hidden' name='produkt' value='$wiersz[0]'>
-                                <input type='hidden' name='cena' value='$wiersz[1]'>
-                                <label for='ilosc'>Ilość:</label>    
-                                <input type='number' name='ilosc'>
-                                <input type='submit' name='doKoszyka'>
-                            </form>
                         </div>";
-
                     }
+                    
                     
                 ?>
        </div>
