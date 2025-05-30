@@ -88,30 +88,40 @@ footer{
     
     
 }
-#niewidzialny{
-   position: absolute;
-     top: 5%; 
-     left: 5%;  
-     width: 90%;
-     height: 90%;
-     color: white;
-     display: flex;
-    flex-wrap: column;
-    
-    
+#niewidzialny {
+  position: absolute;
+  top: 5%; 
+  left: 5%;  
+  width: 90%;
+  height: 90%;
+  color: white;
+
+  display: flex;
+  flex-wrap: wrap;          
+  justify-content: center;  
+  align-items: flex-start;
+  gap: 2%;                  
+  overflow-y: auto;         
 }
-.katalog{
-  height: 100%;
-  flex: 1;
+
+
+.katalog {
+  width:90%;
+  height: 90%;
+  margin: 1%;
+  padding: 10px;
+  
+  border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  font-size: 150%;
-  
+  justify-content: space-between;
+  font-size: 120%;
 }
+
+
 .katalog img{
-  max-height: 38%;  
+  max-height: 50%;  
   width: auto;
   object-fit: contain;
   
@@ -181,21 +191,27 @@ nav>a:hover{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 2%;
   text-align: center;
   color: white;
-  background-color: #111;
-  max-width: 800px;
+  
+  max-width:90%;
   margin: 2% auto;
-  border: 1px solid #333;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+ position: absolute;
+  top: 5%; 
+  left: 5%;  
+  width: 90%;
+  height: 80%;
+  
+  
+  
 }
 
 .produkt-szczegoly img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 20px;
+ 
   border-radius: 10px;
   object-fit: contain;
 }
@@ -238,7 +254,30 @@ nav>a:hover{
   color: black;
 }
 
-
+.chatBottom{
+  
+  height: 10%;
+  width: 100%;
+  position: absolute;
+  top: 90%;
+  text-align: center;
+  
+}
+.chatMessages{
+  float: left;
+  height: 90%;
+  width: 90%;
+  
+  position: absolute;
+     top: 5%; 
+     left: 5%;  
+     width: 90%;
+     height: 90%;
+     
+     opacity: 0.5;
+     background-color: black;
+     color: white;
+}
 body.light .produkt-szczegoly {
   background-color: white;
   color: black;

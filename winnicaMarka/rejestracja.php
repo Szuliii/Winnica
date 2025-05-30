@@ -11,6 +11,7 @@
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
+        <a href="chat.php">Chat</a>
         <a href="logowanie.php">Logowanie</a>
         <button onclick="zmienTryb()">Zmień tryb</button>
     </nav>

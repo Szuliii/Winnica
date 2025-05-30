@@ -15,6 +15,7 @@ session_start();
     <nav><a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
          <a href="sklep.php">Sklep</a>
         <a href="koszyk.php">Koszyk</a>
+        <a href="chat.php">Chat</a>
         <button onclick="zmienTryb()">Zmień tryb</button>
          <form action="" method="post"><input type="submit" value="Wyloguj" name="wyloguj"></form>
     </nav>

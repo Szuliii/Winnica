@@ -67,6 +67,7 @@ if (isset($_POST['doKoszyka']) && isset($_POST['ilosc'])) {
     <a href="main.php"><img src="zdj/LogoSklepu.png" alt=""></a>
     <a href="sklep.php">Sklep</a>
     <a href="koszyk.php">Koszyk</a>
+    <a href="chat.php">Chat</a>
     <button onclick="zmienTryb()">Zmień tryb</button>
     <form action="sklep.php" method="post">
         <input type="submit" name="wyloguj" value="Wyloguj">
@@ -74,6 +75,8 @@ if (isset($_POST['doKoszyka']) && isset($_POST['ilosc'])) {
 </nav>
 
 <main>
+    <img src="zdj/winnicav2.jpg" alt="Winnica" style="max-width: 100%; height: auto;">
+    <div id="katalogKoszyk"></div>
     <div class="produkt-szczegoly">
         <img src="zdj/<?php echo $produkt['zdjecie']; ?>" alt="" style="max-width:400px;"><br>
         <h1><?php echo $produkt['nazwa']; ?></h1>
